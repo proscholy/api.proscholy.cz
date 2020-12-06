@@ -29,13 +29,17 @@ return [
          * make sure to return spec-compliant responses in case an error is thrown.
          */
         'middleware' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+
             \Nuwave\Lighthouse\Support\Http\Middleware\AcceptJson::class,
 
             // Logs in a user if they are authenticated. In contrast to Laravel's 'auth'
             // middleware, this delegates auth and permission checks to the field level.
             // If you want to use another guard, change the suffix (remove for default).
-            \Nuwave\Lighthouse\Support\Http\Middleware\AttemptAuthentication::class.':api',
+            \Nuwave\Lighthouse\Support\Http\Middleware\AttemptAuthentication::class,
         ],
+
+        'guard' => 'sanctum'
 
         /*
          * The `prefix` and `domain` configuration options are optional.
@@ -267,7 +271,7 @@ return [
             ],
             'pusher' => [
                 'driver' => 'pusher',
-                'routes' => \Nuwave\Lighthouse\Subscriptions\SubscriptionRouter::class.'@pusher',
+                'routes' => \Nuwave\Lighthouse\Subscriptions\SubscriptionRouter::class . '@pusher',
                 'connection' => 'pusher',
             ],
         ],
