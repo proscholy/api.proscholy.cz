@@ -11,7 +11,7 @@ if cd releases ; then
 else
     echo "Releases folder not found, creating one"
     mkdir releases && cd releases
-fi
+fi 
 
 DATESTAMP=`date +"%Y-%m-%d-%H-%M-%S"`
 
