@@ -52,7 +52,7 @@ extend type Query  {
     external(id: ID! @eq): External @find
 }
 
-extend type Mutation @middleware(checks: ["auth:api"]) {
+extend type Mutation @guard {
     create_external(input: CreateExternalInput! @spread): External @create
     update_external(input: UpdateExternalInput! @spread): External @update
 

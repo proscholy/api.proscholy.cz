@@ -15,7 +15,7 @@ extend type Query {
     news_items(active: Boolean @scope(name: "active")): [NewsItem] @all
 }
 
-extend type Mutation @middleware(checks: ["auth:api"]) {
+extend type Mutation @guard {
     update_news_item(input: UpdateNewsItemInput! @spread): NewsItem @update
     delete_news_item(id: ID!): NewsItem @delete
 }

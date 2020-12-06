@@ -50,13 +50,14 @@ import { ApolloLink } from 'apollo-link';
 // }
 
 var base_url = document.querySelector('#baseUrl').getAttribute('value');
-var user_token = document.querySelector('#userToken').getAttribute('value');
+// var user_token = document.querySelector('#userToken').getAttribute('value');
+var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
 const authMiddleware = new ApolloLink((operation, forward) => {
     // add the authorization to the headers
     operation.setContext({
         headers: {
-            authorization: `Bearer ${user_token}`
+            'X-CSRF-TOKEN': csrf_token
         }
     });
 

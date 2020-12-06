@@ -18,7 +18,7 @@ extend type Query {
     songbook(id: ID! @eq): Songbook @find
 }
 
-extend type Mutation @middleware(checks: ["auth:api"]) {
+extend type Mutation @guard {
     update_songbook(input: UpdateSongbookInput!): Songbook
 
     delete_songbook(id: ID!): Songbook @delete

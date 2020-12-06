@@ -38,6 +38,6 @@ type Query {
     well_hello_there(id: ID! @eq): Author @find @deprecated(reason: "Only a dummy thing to comply with graphql schema")
 }
 
-type Mutation @middleware(checks: ["auth:api"]) {
+type Mutation @guard {
     well_hello_there(id: ID! @eq): Author @find @deprecated(reason: "Only a dummy thing to comply with graphql schema")
 }

@@ -28,7 +28,7 @@ extend type Query {
     author(id: ID! @eq): Author @find
 }
 
-extend type Mutation @middleware(checks: ["auth:api"]) {
+extend type Mutation @guard {
     delete_author(id: ID!): Author @delete
     update_author(input: UpdateAuthorInput! @spread): Author @update
 }

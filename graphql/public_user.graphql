@@ -11,7 +11,7 @@ extend type Query {
     current_public_user: PublicUser @auth(guard: "web_firebase")
 }
 
-extend type Query @middleware(checks: ["auth:api"]) {
+extend type Query @guard {
     public_users: [PublicUser] @all(model: "App\\PublicModels\\PublicUser")
 }
 

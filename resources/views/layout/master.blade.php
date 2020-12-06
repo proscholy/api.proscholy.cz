@@ -16,7 +16,6 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#292929">
     <meta id="baseUrl" name="baseUrl" value="{{url('')}}">
-    <meta id="userToken" name="userToken" value="{{ Auth::check() ? Auth::user()->getApiToken() : ''}}">
     
     @stack('meta_tags')
 

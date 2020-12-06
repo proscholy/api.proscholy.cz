@@ -31,7 +31,7 @@ extend type Query  {
     file(id: ID! @eq): File @find
 }
 
-extend type Mutation @middleware(checks: ["auth:api"]) {
+extend type Mutation @guard {
     update_file(input: UpdateFileInput! @spread): File @update
 
     delete_file(id: ID!): File @delete

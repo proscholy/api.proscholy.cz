@@ -9,7 +9,7 @@ extend type Query @guard {
     me: User @auth
 }
 
-extend type Query @middleware(checks: ["auth:api"]) {
+extend type Query @guard {
     users: [User!]! @all
     user(id: ID @eq): User @find
 }

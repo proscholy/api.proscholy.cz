@@ -213,7 +213,7 @@ enum BibleReferenceType {
     OSIS @enum(value: 2)
 }
 
-extend type Mutation @middleware(checks: ["auth:api"]) {
+extend type Mutation @guard {
     delete_song_lyric(id: ID!): SongLyric @delete
 
     update_song_lyric(input: UpdateSongLyricInput!): SongLyric # see App/GraphQL/Mutations/UpdateSongLyric.php
