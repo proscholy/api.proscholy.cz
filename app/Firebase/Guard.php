@@ -1,30 +1,33 @@
 <?php
+
 namespace App\Firebase;
 
-use Firebase\Auth\Token\Verifier;
+// use Firebase\Auth\Token\Verifier;
 use App\PublicModels\PublicUser;
 
 class Guard
 {
-    protected $verifier;
-    public function __construct(Verifier $verifier)
+    // protected $verifier;
+    public function __construct()
     {
-        $this->verifier = $verifier;
+        // $this->verifier = $verifier;
     }
 
     public function public_user($request)
     {
-        $jwt = $request->bearerToken();
+        return PublicUser::first();
 
-        $cached = PublicUser::whereLastJwtToken($jwt)->first();
+        // $jwt = $request->bearerToken();
 
-        if (isset($jwt) && $jwt && $cached) {
-            return $cached;
-        }
+        // $cached = PublicUser::whereLastJwtToken($jwt)->first();
 
-        // this takes quite a long time (cca 5s)
-        $token = $this->verifier->verifyIdToken($jwt);
+        // if (isset($jwt) && $jwt && $cached) {
+        //     return $cached;
+        // }
 
-        return PublicUser::getPublicUserFromClaims($token->getClaims(), $jwt);
+        // // this takes quite a long time (cca 5s)
+        // $token = $this->verifier->verifyIdToken($jwt);
+
+        // return PublicUser::getPublicUserFromClaims($token->getClaims(), $jwt);
     }
 }

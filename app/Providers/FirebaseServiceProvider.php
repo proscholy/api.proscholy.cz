@@ -17,18 +17,17 @@ class FirebaseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
     }
-    
-    
+
+
     public function register()
     {
-        $this->app->singleton(Verifier::class, function ($app) {
-            return new Verifier(config('services.firebase.project_name'));
-        });
+        // $this->app->singleton(Verifier::class, function ($app) {
+        //     return new Verifier(config('services.firebase.project_name'));
+        // });
 
-        Auth::viaRequest('firebase', function ($request) {
-            return app(FirebaseGuard::class)->public_user($request);
-        });
+        // Auth::viaRequest('firebase', function ($request) {
+        //     return app(FirebaseGuard::class)->public_user($request);
+        // });
     }
 }

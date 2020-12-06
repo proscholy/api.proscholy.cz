@@ -33,10 +33,6 @@ return [
         'model' => App\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
-    ],
-
-    'firebase' => [
-        'project_name' => env('FIREBASE_PROJECT_ID')
     ]
 
 ];

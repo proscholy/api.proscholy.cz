@@ -41,11 +41,6 @@ return [
             'provider' => 'users',
         ],
 
-        'web_firebase' => [
-            'driver' => 'firebase',
-            // 'provider' => 'public_users'
-        ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
