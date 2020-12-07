@@ -1,6 +1,7 @@
 type User {
     id: ID!
     name: String
+    email: String
     public_user: PublicUser
     stats_json: JSON
 }
