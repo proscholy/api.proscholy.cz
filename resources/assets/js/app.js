@@ -33,7 +33,7 @@ import { ApolloLink } from 'apollo-link';
 import VueApollo from 'vue-apollo';
 
 var base_url = document.querySelector('#baseUrl').getAttribute('value');
-var user_token = document.querySelector('#userToken').getAttribute('value');
+var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
 // HTTP connexion to the API
 const httpLink = createHttpLink({
@@ -47,7 +47,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
     // add the authorization to the headers
     operation.setContext({
         headers: {
-            authorization: `Bearer ${user_token}`
+            'X-CSRF-TOKEN': csrf_token
         }
     });
 
