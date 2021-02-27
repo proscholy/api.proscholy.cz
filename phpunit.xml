@@ -20,6 +20,10 @@
         <testsuite name="GraphQL">
             <directory suffix="Test.php">./tests/GraphQL</directory>
         </testsuite>
+
+        <testsuite name="Elastic">
+            <directory suffix="Test.php">./tests/Elastic</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

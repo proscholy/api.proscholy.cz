@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Elastic;
 
 use Tests\TestCase;
 use Elasticsearch\Client;
@@ -8,7 +8,7 @@ use Elasticsearch\Client;
 use ScoutElastic\IndexConfigurator;
 use App\Elastic\AuthorIndexConfigurator;
 
-class ElasticAuthorIndexTest extends TestCase
+class AuthorIndexTest extends TestCase
 {
     protected Client $client;
     protected IndexConfigurator $index_config;

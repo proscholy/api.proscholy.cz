@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Elastic;
 
 use Tests\TestCase;
 use Elasticsearch\Client;
@@ -8,7 +8,7 @@ use Elasticsearch\Client;
 use ScoutElastic\IndexConfigurator;
 use App\Elastic\SongLyricIndexConfigurator;
 
-class ElasticSongLyricIndexTest extends TestCase
+class SongLyricIndexTest extends TestCase
 {
     protected Client $client;
     protected IndexConfigurator $index_config;
@@ -75,6 +75,25 @@ class ElasticSongLyricIndexTest extends TestCase
         $this->assertContains('10000', $toks);
         $this->assertContains('reasons', $toks);
     }
+
+    // public function testSongLyricTextAnalyzer()
+    // {
+    //     $res = $this->client->indices()->analyze([
+    //         'index' => $this->index_name,
+    //         'body' => [
+    //             'analyzer' => 'text_analyzer',
+    //             'text' => 'Chval ho, ó, duše má'
+    //         ]
+    //     ]);
+
+    //     $toks = array_map(fn ($tok) => $tok['token'], $res['tokens']);
+    //     logger($toks);
+
+    //     $this->assertContains('chval', $toks);
+    //     $this->assertContains('chval ho o', $toks);
+    //     $this->assertContains('duse ma', $toks);
+    //     $this->assertContains('duse', $toks);
+    // }
 
     public function testDeleteIndex()
     {
