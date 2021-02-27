@@ -24,9 +24,8 @@ class AuthorIndexConfigurator extends IndexConfigurator
                 'name_analyzer' => [
                     'tokenizer' => 'my_tokenizer',
                     'filter' => [
-                        'czech_stemmer',
-                        'asciifolding',
-                        'lowercase'
+                        'lowercase',
+                        'asciifolding'
                     ]
                 ]
             ],

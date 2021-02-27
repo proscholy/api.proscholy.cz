@@ -56,10 +56,10 @@ class ElasticSongLyricIndexTest extends TestCase
         $toks = array_map(fn ($tok) => $tok['token'], $res['tokens']);
         logger($toks);
 
-        // $this->assertContains('petr', $toks);
-        // $this->assertContains('pe', $toks);
-        // $this->assertContains('koron', $toks);
-        // $this->assertContains('koronthaly', $toks);
+        $this->assertContains('chval', $toks);
+        $this->assertContains('chval ho o', $toks);
+        $this->assertContains('duse ma', $toks);
+        $this->assertContains('duse', $toks);
 
         $res = $this->client->indices()->analyze([
             'index' => $this->index_name,
@@ -72,11 +72,10 @@ class ElasticSongLyricIndexTest extends TestCase
         $toks = array_map(fn ($tok) => $tok['token'], $res['tokens']);
         logger($toks);
 
-        // $this->assertContains('petr', $toks);
-        // $this->assertContains('pe', $toks);
-        // $this->assertContains('koron', $toks);
-        // $this->assertContains('koronthaly', $toks);
-
+        $this->assertContains('10000', $toks);
+        $this->assertContains('reasons', $toks);
+        $this->assertContains('koron', $toks);
+        $this->assertContains('koronthaly', $toks);
     }
 
     public function testDeleteIndex()

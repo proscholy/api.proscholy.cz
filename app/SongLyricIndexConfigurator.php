@@ -4,6 +4,7 @@ namespace App;
 
 use ScoutElastic\IndexConfigurator;
 use ScoutElastic\Migratable;
+use stdClass;
 
 class SongLyricIndexConfigurator extends IndexConfigurator
 {
@@ -22,6 +23,27 @@ class SongLyricIndexConfigurator extends IndexConfigurator
                 'czech_stemmer' => [
                     'type' => 'stemmer',
                     'language' => 'czech'
+                ],
+                'phrases' => [
+                    'type' => 'shingle',
+                    "min_shingle_size" => 2,
+                    "max_shingle_size" => 3
+                ],
+                'name_edge_ngram' => [
+                    "type" => "edge_ngram",
+                    "max_gram" => 10,
+                    "token_chars" => [
+                        "letter",
+                        "digit"
+                    ]
+                ]
+            ],
+            'char_filter' => [
+                'remove_commas' => [
+                    'type' => 'mapping',
+                    'mappings' => [
+                        ', => '
+                    ]
                 ]
             ],
             'analyzer' => [
@@ -35,11 +57,17 @@ class SongLyricIndexConfigurator extends IndexConfigurator
                     ]
                 ],
                 'name_analyzer' => [
-                    'tokenizer' => 'my_tokenizer',
+                    'tokenizer' => 'whitespace',
                     'filter' => [
-                        'czech_stemmer',
+                        'lowercase',
                         'asciifolding',
-                        'lowercase'
+                        'phrases',
+                        'name_edge_ngram',
+                        'trim',
+                        'unique'
+                    ],
+                    'char_filter' => [
+                        'remove_commas'
                     ]
                 ]
             ],
@@ -49,8 +77,7 @@ class SongLyricIndexConfigurator extends IndexConfigurator
                     "max_gram" => 10,
                     "token_chars" => [
                         "letter",
-                        "digit",
-                        "whitespace"
+                        "digit"
                     ]
                 ]
             ]
