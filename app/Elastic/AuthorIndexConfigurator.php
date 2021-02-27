@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Elastic;
 
 use ScoutElastic\IndexConfigurator;
 use ScoutElastic\Migratable;

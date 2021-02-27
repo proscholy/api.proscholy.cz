@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use ScoutElastic\Searchable;
+// use ScoutElastic\Searchable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use App\Services\AuthorService;
-use Log;
+
+use App\Elastic\AuthorSearchableTrait;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,8 +50,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Author extends Model
 {
-    // Laravel Scout Trait used for full-text searching
-    use Searchable, RevisionableTrait, HasFactory;
+    use AuthorSearchableTrait, RevisionableTrait, HasFactory;
     protected $revisionCreationsEnabled = true;
     protected $dontKeepRevisionOf = ['visits'];
 
@@ -65,18 +65,6 @@ class Author extends Model
         2 => 'schola',
         3 => 'kapela',
         4 => 'sbor',
-    ];
-
-    protected $indexConfigurator = AuthorIndexConfigurator::class;
-
-    // Here you can specify a mapping for model fields
-    protected $mapping = [
-        'properties' => [
-            'name' => [
-                'type' => 'text',
-                'analyzer' => 'name_analyzer',
-            ]
-        ]
     ];
 
     public function __construct($attributes = array())
@@ -178,21 +166,6 @@ class Author extends Model
 
             return $author;
         }
-    }
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array;
-     */
-    public function toSearchableArray()
-    {
-        $array = $this->toArray();
-
-        // Preserve only attributes that are meant to be searched in
-        $searchable = Arr::only($array, ['name', 'description']);
-
-        return $searchable;
     }
 
     public function getPublicUrlAttribute()

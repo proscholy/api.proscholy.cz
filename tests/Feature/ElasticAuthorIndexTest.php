@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Elasticsearch\Client;
 
 use ScoutElastic\IndexConfigurator;
-use App\AuthorIndexConfigurator;
+use App\Elastic\AuthorIndexConfigurator;
 
 class ElasticAuthorIndexTest extends TestCase
 {

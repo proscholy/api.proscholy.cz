@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Elasticsearch\Client;
 
 use ScoutElastic\IndexConfigurator;
-use App\SongLyricIndexConfigurator;
+use App\Elastic\SongLyricIndexConfigurator;
 
 class ElasticSongLyricIndexTest extends TestCase
 {
