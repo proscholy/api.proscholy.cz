@@ -25,9 +25,13 @@ type SongLyric {
     """
     song_number: Int
     """
-    Lyrics without ChordPro and other syntactical things - just plain words
+    Lyrics without ChordPro and other syntactical things - just plain words (including comment lines starting with #)
     """
     lyrics_no_chords: String
+    """
+    Lyrics without ChordPro and other syntactical things - just plain words
+    """
+    lyrics_no_chords_no_comments: String
     """
     Raw unparsed lyrics of the song, including:
     - ChordPro chord tags: `[C], [Dmi]` ...

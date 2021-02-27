@@ -65,7 +65,7 @@ class ElasticSongLyricIndexTest extends TestCase
             'index' => $this->index_name,
             'body' => [
                 'analyzer' => 'name_analyzer',
-                'text' => '10,000 reasons'
+                'text' => ['10,000 reasons', '10,000 duvodu']
             ]
         ]);
 
@@ -74,8 +74,6 @@ class ElasticSongLyricIndexTest extends TestCase
 
         $this->assertContains('10000', $toks);
         $this->assertContains('reasons', $toks);
-        $this->assertContains('koron', $toks);
-        $this->assertContains('koronthaly', $toks);
     }
 
     public function testDeleteIndex()

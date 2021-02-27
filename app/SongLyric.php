@@ -262,9 +262,20 @@ class SongLyric extends Model
     public function getLyricsNoChordsAttribute()
     {
         $str = preg_replace(
-            array('/-/', '/\[[^\]]+\]/', '/@[^\s]+/', '/^\s*#.*/m'),
+            array('/-/', '/\[[^\]]+\]/', '/@[^\s]+/'),
             array("", "", "", ""),
             $this->lyrics
+        );
+
+        return trim($str);
+    }
+
+    public function getLyricsNoChordsNoCommentsAttribute()
+    {
+        $str = preg_replace(
+            array('/^\s*#.*/m'),
+            array(""),
+            $this->lyrics_no_chords
         );
 
         return trim($str);
@@ -566,24 +577,17 @@ class SongLyric extends Model
             );
         }
 
-        // adjoin files' instrumentation tags
-        foreach ($interestingFiles as $file) {
-            $tag_ids = $tag_ids->concat(
-                $file->tags()->instrumentation()->select('id')->get()->pluck('id')
-            );
-        }
-
-        $fullname = $this->name;
-        if ($this->secondary_name_1) $fullname .= ' ' . $this->secondary_name_1;
-        if ($this->secondary_name_2) $fullname .= ' ' . $this->secondary_name_2;
+        $names = $this->name;
+        if ($this->secondary_name_1) $names[] = $this->secondary_name_1;
+        if ($this->secondary_name_2) $names[] = $this->secondary_name_2;
 
         $arr = [
-            'name' => $fullname,
+            'name' => $names,
             // name_keyword is used for sorting
             'name_keyword' => $this->name,
             'song_number' => $this->song_number,
             'song_number_integer' => (int)$this->song_number,
-            'lyrics' => $this->lyrics_no_chords,
+            'lyrics' => $this->lyrics_no_chords_no_comments,
             'authors' => $all_authors->pluck('name'),
             'songbook_records' => $songbook_records,
             'lang' => $this->lang,
@@ -594,12 +598,13 @@ class SongLyric extends Model
             'has_score_files_externals' => $this->scoreExternals()->count() + $this->scoreFiles()->count() > 0,
             'has_lyrics' => $this->has_lyrics, // a computed attribute
             'has_chords' => (bool)$this->has_chords, // an actual field precomputed in SongLyricSaved event
+            'has_lilypond' => $this->lilypond != null
         ];
 
         return $arr;
     }
 
-    // todo: make obsolete
+    // todo: remove
     public function getFormattedLyrics()
     {
         $output = "";
