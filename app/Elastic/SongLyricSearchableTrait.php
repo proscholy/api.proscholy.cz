@@ -138,7 +138,7 @@ trait SongLyricSearchableTrait
             );
         }
 
-        $names = $this->name;
+        $names = [$this->name];
         if ($this->secondary_name_1) $names[] = $this->secondary_name_1;
         if ($this->secondary_name_2) $names[] = $this->secondary_name_2;
 
