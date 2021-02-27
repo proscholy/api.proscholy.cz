@@ -4,7 +4,6 @@ namespace App\Elastic;
 
 use ScoutElastic\IndexConfigurator;
 use ScoutElastic\Migratable;
-use stdClass;
 
 class SongLyricIndexConfigurator extends IndexConfigurator
 {
@@ -46,6 +45,23 @@ class SongLyricIndexConfigurator extends IndexConfigurator
                     ]
                 ]
             ],
+            'tokenizer' => [
+                "my_tokenizer" => [
+                    "type" => "edge_ngram",
+                    "max_gram" => 10,
+                    "token_chars" => [
+                        "letter",
+                        "digit"
+                    ]
+                ]
+            ],
+
+            // each analyzer uses custom-defined filters, char_filters and tokenizers from above
+            // or pre-defined elastic ones (such as 'standard', 'trim', 'unique', ...)
+            // see the Elasticsearch docs for more
+
+            // these analyzers can be referenced in the model mapping (see $mapping in <Model>SearchableTrait.php)
+
             'analyzer' => [
                 'czech_analyzer' => [
                     'tokenizer' => 'standard',
@@ -68,16 +84,6 @@ class SongLyricIndexConfigurator extends IndexConfigurator
                     ],
                     'char_filter' => [
                         'remove_commas'
-                    ]
-                ]
-            ],
-            'tokenizer' => [
-                "my_tokenizer" => [
-                    "type" => "edge_ngram",
-                    "max_gram" => 10,
-                    "token_chars" => [
-                        "letter",
-                        "digit"
                     ]
                 ]
             ]

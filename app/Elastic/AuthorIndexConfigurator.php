@@ -20,15 +20,6 @@ class AuthorIndexConfigurator extends IndexConfigurator
                     'language' => 'czech'
                 ],
             ],
-            'analyzer' => [
-                'name_analyzer' => [
-                    'tokenizer' => 'my_tokenizer',
-                    'filter' => [
-                        'lowercase',
-                        'asciifolding'
-                    ]
-                ]
-            ],
             'tokenizer' => [
                 "my_tokenizer" => [
                     "type" => "edge_ngram",
@@ -36,6 +27,22 @@ class AuthorIndexConfigurator extends IndexConfigurator
                     "token_chars" => [
                         "letter",
                         "digit"
+                    ]
+                ]
+            ],
+
+            // each analyzer uses custom-defined filters, char_filters and tokenizers from above
+            // or pre-defined elastic ones (such as 'standard', 'trim', 'unique', ...)
+            // see the Elasticsearch docs for more
+
+            // these analyzers can be referenced in the model mapping (see $mapping in <Model>SearchableTrait.php)
+
+            'analyzer' => [
+                'name_analyzer' => [
+                    'tokenizer' => 'my_tokenizer',
+                    'filter' => [
+                        'lowercase',
+                        'asciifolding'
                     ]
                 ]
             ]
