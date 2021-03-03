@@ -16,8 +16,8 @@ trait SongLyricSearchableTrait
     protected $mapping = [
         'properties' => [
             'name' => [
-                'type' => 'text',
-                'analyzer' => 'name_analyzer',
+                'type' => 'search_as_you_type',
+                'analyzer' => 'name_analyzer_as_you_type',
             ],
             'lyrics' => [
                 'type' => 'text',
