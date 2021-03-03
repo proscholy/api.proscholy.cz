@@ -60,6 +60,14 @@ services:
         healthcheck:
             test: ["CMD", "redis-cli", "ping"]
 
+    elastic:
+        extends:
+            file: docker/elastic.yml
+            service: elasticsearch
+        restart: always
+        networks:
+            - sail
+
 networks:
     sail:
         driver: bridge
