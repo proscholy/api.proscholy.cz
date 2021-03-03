@@ -85,6 +85,29 @@ class SongLyricIndexConfigurator extends IndexConfigurator
                     'char_filter' => [
                         'remove_commas'
                     ]
+                ],
+
+                'name_analyzer_as_you_type' => [
+                    'tokenizer' => 'whitespace',
+                    'filter' => [
+                        'lowercase',
+                        'asciifolding'
+                    ],
+                    'char_filter' => [
+                        'remove_commas'
+                    ]
+                ],
+
+                'text_analyzer_phrases' => [
+                    'tokenizer' => 'standard',
+                    'filter' => [
+                        'lowercase',
+                        'keyword_repeat',
+                        'czech_stemmer',
+                        'remove_duplicates',
+                        // 'asciifolding',
+                        // 'phrases'
+                    ]
                 ]
             ]
         ]
