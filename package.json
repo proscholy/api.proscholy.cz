@@ -44,7 +44,7 @@
         "graphql-tag": "^2.10.1",
         "jquery": "^3.5.1",
         "laravel-mix": "^5.0",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "materialize-css": "^1.0.0-rc.2",
         "nosleep.js": "^0.9.0",
         "npm": "^6.4.0",
